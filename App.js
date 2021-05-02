@@ -6,14 +6,22 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
 // My Navigational Flow
-import {HomeScreenStack, MyDrawer} from './Navigation/MainNavigator';
+import {HomeScreenStack, MyBottomTabNavigator, MyDrawer} from './Navigation/MainNavigator';
 
 const App = props => {
 
   return (
+    // <NavigationContainer>
+    //   <HomeScreenStack />
+    // </NavigationContainer>
+
     <NavigationContainer>
-      <HomeScreenStack />
+      <MyDrawer />
     </NavigationContainer>
+
+    // <NavigationContainer>
+    //   <MyBottomTabNavigator />
+    // </NavigationContainer>
   );
 
 }
