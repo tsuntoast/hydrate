@@ -4,13 +4,13 @@ import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, Keyboard, Keyb
 import {changeToML, changeToOz} from '../store/actions/actionTypes';
 import {useSelector, useDispatch} from 'react-redux';
 
-const HomeScreen = props => {
+const SettingsScreen = props => {
 
     const dispatch = useDispatch();
     const changeUnitsToML = () => dispatch({ type: changeToML });
     const changeUnitsToOz = () => dispatch({ type: changeToOz });
     // Calling in state from redux
-    const units = useSelector(state => state.units);
+    const units = useSelector(state => state.unit);
 
     //const [units, setUnits] = useState('oz');
 
@@ -34,7 +34,7 @@ const HomeScreen = props => {
                         <TouchableOpacity onPress={() => { changeUnitsToML() }} >
                             <Text>Milliliters (mL)</Text>
                         </TouchableOpacity>
-                        <Text>units = {units.units}</Text>
+                        <Text>units = {units.unit}</Text>
                     </View>
 
                     <View>
@@ -68,4 +68,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default HomeScreen;
+export default SettingsScreen;

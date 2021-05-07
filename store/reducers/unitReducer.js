@@ -1,7 +1,7 @@
 import { changeToML, changeToOz } from '../actions/actionTypes';
 
 const initialState = {
-   units: 'oz'
+   unit: 'oz'
 };
 
 const unitReducer = (state = initialState, action) => {
@@ -9,26 +9,26 @@ const unitReducer = (state = initialState, action) => {
    switch (action.type) {
 
       case changeToOz:
-         //const currentUnits = state.units;
+         //const currentUnit = state.unit;
 
-         if (state.units === 'mL') {
-            const updatedUnits = 'oz';
-            return { ...state, units: 'oz' };
+         if (state.unit === 'mL') {
+            const updatedUnit = 'oz';
+            return { ...state, unit: 'oz' };
          }
 
       case changeToML:
 
-         if (state.units === 'oz') {
+         if (state.unit === 'oz') {
             console.warn("oz changed to ML");
-            const updatedUnits = 'mL';
+            const updatedUnit = 'mL';
 
-            return { ...state, units: 'mL' };
+            return { ...state, unit: 'mL' };
 
          }
-      // else if (currentUnits === 'mL') {
-      //    const updatedUnits = 'oz';
+      // else if (currentUnit === 'mL') {
+      //    const updatedUnit = 'oz';
 
-      //    return { ...state, units: updatedUnits };
+      //    return { ...state, unit: updatedUnit };
       // }
 
       default:

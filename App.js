@@ -15,7 +15,7 @@ import unitReducer from './store/reducers/unitReducer';
 
 const rootReducer = combineReducers({
   count: countReducer,
-  units: unitReducer
+  unit: unitReducer
 });
 
 const store = createStore(rootReducer);

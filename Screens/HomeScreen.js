@@ -10,7 +10,7 @@ const HomeScreen = props => {
     const add = (target) => dispatch({ type: addCount, value: Number(target) });
     // Calling in state from redux
     const counts = useSelector(state => state.count);
-    const units = useSelector(state => state.units);
+    const units = useSelector(state => state.unit);
 
     // const [count, setCount] = useState(0);
     const [loggedAmount, setLoggedAmount] = useState('');
@@ -34,7 +34,8 @@ const HomeScreen = props => {
                     <View style={styles.dailySummaryContainer}>
                         <Text>You have drank</Text>
                         <Text style={{ fontSize: 60 }}>{counts.count}</Text>
-                        <Text>{units.units} of water today.</Text>
+                        <Text>{units.unit} of water today.</Text>
+
                     </View>
 
                     <View style={{ paddingVertical: 20 , alignItems: 'center'}}>

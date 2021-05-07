@@ -5,11 +5,11 @@ import {useSelector} from 'react-redux';
 
 
 
-const HomeScreen = props => {
+const ActivityScreen = props => {
 
     //Redux
     const counts = useSelector(state => state.count);
-    const units = useSelector(state => state.units);
+    const units = useSelector(state => state.unit);
 
     return (
         <KeyboardAvoidingView
@@ -22,6 +22,7 @@ const HomeScreen = props => {
                     <View>
                         <Text>hi this is Activity</Text>
                         <Text>test {counts.count} test {units.units}</Text>
+                        <Text>weekly = {counts.weekCount} , month = {counts.monthCount}</Text>
                         
                     </View>
                 </SafeAreaView>
@@ -41,4 +42,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default HomeScreen;
+export default ActivityScreen;
