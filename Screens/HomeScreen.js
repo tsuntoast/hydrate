@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, Button, Image, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 
 import {addCount} from '../store/actions/actionTypes';
 import {useSelector, useDispatch} from 'react-redux';
@@ -29,7 +29,11 @@ const HomeScreen = props => {
 
         
                 <SafeAreaView>
-                    
+
+                    <View style={styles.imageContainer}>
+                        <Image source={require('../assets/logo.png')}
+                                style={{ width: 100, height: 100, resizeMode: 'contain' }} />
+                    </View>
 
                     <View style={styles.dailySummaryContainer}>
                         <Text>You have drank</Text>
@@ -47,14 +51,11 @@ const HomeScreen = props => {
                                 alert("Empty field. Please try again.");
                             }
                             else {
-                                //setCount(count + Number(loggedAmount));
-
                                 // Redux
                                 add(loggedAmount);
 
                                 // Resets text input field
                                 setLoggedAmount('');
-                                
                             }
 
                         }} />
@@ -73,6 +74,10 @@ const styles = StyleSheet.create({
         //flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    imageContainer: {
+        alignItems: 'center',
+        paddingBottom: 20
     },
     dailySummaryContainer: {
         justifyContent: 'center',
