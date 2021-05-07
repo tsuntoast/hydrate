@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 
+import {useSelector} from 'react-redux';
+
+
+
 const HomeScreen = props => {
 
-    const [searchTitle, setSearchTitle] = useState('');
+    //Redux
+    const counts = useSelector(state => state.count);
+    const units = useSelector(state => state.units);
 
     return (
         <KeyboardAvoidingView
@@ -15,6 +21,7 @@ const HomeScreen = props => {
 
                     <View>
                         <Text>hi this is Activity</Text>
+                        <Text>test {counts.count} test {units.units}</Text>
                         
                     </View>
                 </SafeAreaView>

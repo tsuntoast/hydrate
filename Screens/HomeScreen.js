@@ -1,24 +1,40 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 
+import {addCount} from '../store/actions/actionTypes';
+import {useSelector, useDispatch} from 'react-redux';
+
 const HomeScreen = props => {
 
-    const [amount, setAmount] = useState(0);
-    const [loggedAmount, setLoggedAmount] = useState(0);
-    const [units, setUnits] = useState('oz');
+    const dispatch = useDispatch();
+    const add = (target) => dispatch({ type: addCount, value: Number(target) });
+    // Calling in state from redux
+    const counts = useSelector(state => state.count);
+    const units = useSelector(state => state.units);
+
+    // const [count, setCount] = useState(0);
+    const [loggedAmount, setLoggedAmount] = useState('');
+    // const [units, setUnits] = useState('oz');
 
     return (
-        <KeyboardAvoidingView
-            style={styles.safeAreaView}
-            behavior="padding"
-        >
-            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        // <KeyboardAvoidingView
+        //     //style={styles.safeAreaView}
+        //     behavior="padding"
+        // >
+            <TouchableWithoutFeedback style={{flex: 1}} onPress={() => Keyboard.dismiss()}>
+            <KeyboardAvoidingView
+                //style={styles.safeAreaView}
+                behavior="padding"
+            >
+
+        
                 <SafeAreaView>
+                    
 
                     <View style={styles.dailySummaryContainer}>
                         <Text>You have drank</Text>
-                        <Text style={{ fontSize: 60 }}>{amount}</Text>
-                        <Text>{units} of water today.</Text>
+                        <Text style={{ fontSize: 60 }}>{counts.count}</Text>
+                        <Text>{units.units} of water today.</Text>
                     </View>
 
                     <View style={{ paddingVertical: 20 , alignItems: 'center'}}>
@@ -30,19 +46,22 @@ const HomeScreen = props => {
                                 alert("Empty field. Please try again.");
                             }
                             else {
-                                setAmount(amount + Number(loggedAmount));
+                                //setCount(count + Number(loggedAmount));
+
+                                // Redux
+                                add(loggedAmount);
 
                                 // Resets text input field
                                 setLoggedAmount('');
-
-
+                                
                             }
 
                         }} />
                     </View>
                 </SafeAreaView>
+                </KeyboardAvoidingView>
             </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
+        //</KeyboardAvoidingView>
 
     );
 
@@ -50,11 +69,12 @@ const HomeScreen = props => {
 
 const styles = StyleSheet.create({
     safeAreaView: {
-        flex: 1,
+        //flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
     dailySummaryContainer: {
+        justifyContent: 'center',
         alignItems: 'center',
     },
     textInput: {

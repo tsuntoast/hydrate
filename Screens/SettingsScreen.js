@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 
+import {changeToML, changeToOz} from '../store/actions/actionTypes';
+import {useSelector, useDispatch} from 'react-redux';
+
 const HomeScreen = props => {
 
-    const [units, setUnits] = useState('oz');
+    const dispatch = useDispatch();
+    const changeUnitsToML = () => dispatch({ type: changeToML });
+    const changeUnitsToOz = () => dispatch({ type: changeToOz });
+    // Calling in state from redux
+    const units = useSelector(state => state.units);
+
+    //const [units, setUnits] = useState('oz');
 
     return (
         <KeyboardAvoidingView
@@ -19,11 +28,13 @@ const HomeScreen = props => {
 
                     <View>
                         <Text style={styles.subHeader}>Volume Units</Text>
-                        <TouchableOpacity activeOpacity='0.2' onPress={() => { setUnits('oz') }} ><Text style={{backgroundColor: 'pink', padding: 2, }}>touch me</Text></TouchableOpacity>
-                        <TouchableOpacity onPress={() => { setUnits('mL') }} ><Text>touch me mL</Text></TouchableOpacity>
-                        {/* <Text>(Fluid) Ounces (oz)</Text>
-                        <Text>Milliliters (mL)</Text> */}
-                        <Text>units = {units}</Text>
+                        <TouchableOpacity onPress={() => { changeUnitsToOz() }} >
+                            <Text style={{ backgroundColor: 'pink', padding: 2, }}>(Fluid) Ounces (oz)</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { changeUnitsToML() }} >
+                            <Text>Milliliters (mL)</Text>
+                        </TouchableOpacity>
+                        <Text>units = {units.units}</Text>
                     </View>
 
                     <View>

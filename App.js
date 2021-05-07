@@ -6,18 +6,35 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
 // My Navigational Flow
-import {HomeScreenStack, MyBottomTabNavigator, MyDrawer} from './Navigation/MainNavigator';
+import { HomeScreenStack, MyBottomTabNavigator, MyDrawer } from './Navigation/MainNavigator';
 
-const App = props => {
+import {combineReducers, createStore} from 'redux';
+import {Provider} from 'react-redux';
+import countReducer from './store/reducers/countReducer';
+import unitReducer from './store/reducers/unitReducer';
+
+const rootReducer = combineReducers({
+  count: countReducer,
+  units: unitReducer
+});
+
+const store = createStore(rootReducer);
+
+export default function App() {
 
   return (
     // <NavigationContainer>
     //   <HomeScreenStack />
     // </NavigationContainer>
 
-    <NavigationContainer>
-      <MyDrawer />
-    </NavigationContainer>
+    <Provider store={store}>
+
+      <NavigationContainer>
+        <MyDrawer />
+      </NavigationContainer>
+
+    </Provider>
+
 
     // <NavigationContainer>
     //   <MyBottomTabNavigator />
@@ -35,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+//export default App;
