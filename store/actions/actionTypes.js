@@ -4,3 +4,5 @@ export const addCount = 'ADD_COUNT';
 export const changeToML = 'CHANGE_TO_ML';
 
 export const changeToOz = 'CHANGE_TO_OZ';
+
+export const addTimestamp = 'ADD_TIMESTAMP';

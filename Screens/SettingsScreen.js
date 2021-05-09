@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, TouchableOpacity} from 'react-native';
 
 import {changeToML, changeToOz} from '../store/actions/actionTypes';
 import {useSelector, useDispatch} from 'react-redux';
@@ -11,8 +11,6 @@ const SettingsScreen = props => {
     const changeUnitsToOz = () => dispatch({ type: changeToOz });
     // Calling in state from redux
     const units = useSelector(state => state.unit);
-
-    //const [units, setUnits] = useState('oz');
 
     return (
         <KeyboardAvoidingView
@@ -28,20 +26,21 @@ const SettingsScreen = props => {
 
                     <View>
                         <Text style={styles.subHeader}>Volume Units</Text>
+
                         <TouchableOpacity onPress={() => { changeUnitsToOz() }} >
-                            <Text style={{ backgroundColor: 'pink', padding: 2, }}>(Fluid) Ounces (oz)</Text>
+                            <Text style={ units.unit === 'oz' ? styles.active : styles.inactive }>(Fluid) Ounces (oz)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { changeUnitsToML() }} >
-                            <Text>Milliliters (mL)</Text>
+                            <Text style={ units.unit === 'mL' ? styles.active : styles.inactive }>Milliliters (mL)</Text>
                         </TouchableOpacity>
-                        <Text>units = {units.unit}</Text>
                     </View>
 
-                    <View>
+                    <View style={{ paddingVertical: 20 }}>
                         <Text style={styles.subHeader}>Reminder Notifications</Text>
                         <Text>Push Notifications</Text>
                         <Text>Remind me every</Text>
                     </View>
+                    
                 </SafeAreaView>
             </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
@@ -65,7 +64,15 @@ const styles = StyleSheet.create({
     },
     subHeader: {
         fontSize: 24,
-    }
+    },
+    active: {
+        backgroundColor: 'lightgrey',
+        padding: 2,
+    },
+    inactive: {
+        
+        padding: 2,
+    },
 });
 
 export default SettingsScreen;
