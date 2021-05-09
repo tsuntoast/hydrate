@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Button, Image, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import HamburgerIcon from '../Components/HamburgerIcon';
 
 import {addCount} from '../store/actions/actionTypes';
 import {useSelector, useDispatch} from 'react-redux';
@@ -12,9 +13,8 @@ const HomeScreen = props => {
     const counts = useSelector(state => state.count);
     const units = useSelector(state => state.unit);
 
-    // const [count, setCount] = useState(0);
+    // FIXME: for timestamps
     const [loggedAmount, setLoggedAmount] = useState('');
-    // const [units, setUnits] = useState('oz');
 
     return (
         // <KeyboardAvoidingView
@@ -29,6 +29,7 @@ const HomeScreen = props => {
 
         
                 <SafeAreaView>
+                    <HamburgerIcon onPress={() => { props.navigation.openDrawer() }} />
 
                     <View style={styles.imageContainer}>
                         <Image source={require('../assets/logo.png')}

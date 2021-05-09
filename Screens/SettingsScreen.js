@@ -1,8 +1,9 @@
 import React from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, TouchableOpacity} from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import HamburgerIcon from '../Components/HamburgerIcon';
 
-import {changeToML, changeToOz} from '../store/actions/actionTypes';
-import {useSelector, useDispatch} from 'react-redux';
+import { changeToML, changeToOz } from '../store/actions/actionTypes';
+import { useSelector, useDispatch } from 'react-redux';
 
 const SettingsScreen = props => {
 
@@ -19,28 +20,31 @@ const SettingsScreen = props => {
         >
             <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
                 <SafeAreaView>
+                    <HamburgerIcon onPress={() => { props.navigation.openDrawer() }} />
 
-                    <View style={styles.headerContainer}>
-                        <Text style={styles.header}>Settings</Text>
+                    <View styles={styles.contentContainer}>
+                        <View style={styles.headerContainer}>
+                            <Text style={styles.header}>Settings</Text>
+                        </View>
+
+                        <View>
+                            <Text style={styles.subHeader}>Volume Units</Text>
+
+                            <TouchableOpacity onPress={() => { changeUnitsToOz() }} >
+                                <Text style={units.unit === 'oz' ? styles.active : styles.inactive}>(Fluid) Ounces (oz)</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { changeUnitsToML() }} >
+                                <Text style={units.unit === 'mL' ? styles.active : styles.inactive}>Milliliters (mL)</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{ paddingVertical: 20 }}>
+                            <Text style={styles.subHeader}>Reminder Notifications</Text>
+                            <Text>Push Notifications</Text>
+                            <Text>Remind me every</Text>
+                        </View>
                     </View>
 
-                    <View>
-                        <Text style={styles.subHeader}>Volume Units</Text>
-
-                        <TouchableOpacity onPress={() => { changeUnitsToOz() }} >
-                            <Text style={ units.unit === 'oz' ? styles.active : styles.inactive }>(Fluid) Ounces (oz)</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => { changeUnitsToML() }} >
-                            <Text style={ units.unit === 'mL' ? styles.active : styles.inactive }>Milliliters (mL)</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={{ paddingVertical: 20 }}>
-                        <Text style={styles.subHeader}>Reminder Notifications</Text>
-                        <Text>Push Notifications</Text>
-                        <Text>Remind me every</Text>
-                    </View>
-                    
                 </SafeAreaView>
             </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
@@ -52,8 +56,11 @@ const SettingsScreen = props => {
 const styles = StyleSheet.create({
     safeAreaView: {
         flex: 1,
+    },
+    contentContainer: {
         justifyContent: 'center',
         alignItems: 'center',
+        width: 75
     },
     headerContainer: {
         alignItems: 'center',
@@ -70,7 +77,7 @@ const styles = StyleSheet.create({
         padding: 2,
     },
     inactive: {
-        
+
         padding: 2,
     },
 });
