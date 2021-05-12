@@ -20,9 +20,6 @@ const HomeScreen = props => {
     //const log = () => dispatch({ type: addTimestamp });
     const record = (date) => dispatch({ type: addRecord, payload: { key: records.recordsKey, timeLog: (date), amount: Number(loggedAmount) } });
 
-
-
-    // FIXME: for timestamps
     const [loggedAmount, setLoggedAmount] = useState('');
     const [isShowing, setIsShowing] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
@@ -73,8 +70,7 @@ const HomeScreen = props => {
                         setIsShowing(!isShowing);
                         setIsExpanded(!isExpanded);
                     }} icon={ isExpanded === true ? faChevronUp : faChevronDown } />
-                    <Text>hi start of flatlist</Text>
-                    {console.log(records)}
+                    {/* {console.log(records)} */}
                     {isShowing ? (
                         <FlatList
                             //contentContainerStyle={{ flex: 1 }}
