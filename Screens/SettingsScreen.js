@@ -12,6 +12,7 @@ const SettingsScreen = props => {
     const changeUnitsToOz = () => dispatch({ type: changeToOz });
     // Calling in state from redux
     const units = useSelector(state => state.unit);
+    const counts = useSelector(state => state.count);
 
     return (
         <KeyboardAvoidingView
@@ -30,10 +31,28 @@ const SettingsScreen = props => {
                         <View>
                             <Text style={styles.subHeader}>Volume Units</Text>
 
-                            <TouchableOpacity onPress={() => { changeUnitsToOz() }} >
+                            <TouchableOpacity disabled={(units.unit === 'oz')} onPress={() => { 
+                                //disabled prevents oz from being reconverted to oz
+                                //convert total count
+                                if (counts.count != 0) {
+                                    counts.count = (counts.count * 0.0338).toFixed(1);
+                                }
+
+                                //convert count of records, parse through records.records.amount
+                                //use map() to mutate records.records.amount
+                                
+                                changeUnitsToOz();
+                                
+                            }} >
                                 <Text style={units.unit === 'oz' ? styles.active : styles.inactive}>(Fluid) Ounces (oz)</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => { changeUnitsToML() }} >
+                            <TouchableOpacity disabled={(units.unit === 'mL')} onPress={() => { 
+                                if (counts.count != 0) {
+                                    counts.count = (counts.count * 29.573).toFixed(1);
+                                }
+                                
+                                changeUnitsToML()
+                            }} >
                                 <Text style={units.unit === 'mL' ? styles.active : styles.inactive}>Milliliters (mL)</Text>
                             </TouchableOpacity>
                         </View>

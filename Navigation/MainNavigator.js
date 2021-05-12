@@ -2,12 +2,11 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { Icon } from 'react-native-elements';
+
 
 // Screens Imports
 import HomeScreen from '../Screens/HomeScreen';
+import HistoryScreen from '../Screens/HistoryScreen';
 import ActivityScreen from '../Screens/ActivityScreen';
 import SettingsScreen from '../Screens/SettingsScreen';
 
@@ -15,6 +14,7 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
+//might not use
 function HomeScreenStack() {
 
     return (
@@ -27,6 +27,7 @@ function HomeScreenStack() {
 
 };
 
+//might not use
 function MyBottomTabNavigator() {
 
     return (
@@ -42,18 +43,35 @@ function MyBottomTabNavigator() {
 function MyDrawer() {
 
     return (
-        <Drawer.Navigator>
-            <Drawer.Screen name="HomeScreen" component={HomeScreen} options={{
-                title: 'Home',
-                // drawerIcon: <Icon
-
-                //     name='bars'
-                //     type='font-awesome'
-                //     size={26}
-                // />
-                }} />
-            <Drawer.Screen name="ActivityScreen" component={ActivityScreen} options={{title: 'Activity'}} />
-            <Drawer.Screen name="SettingsScreen" component={SettingsScreen} options={{title: 'Settings'}} />
+        <Drawer.Navigator onPress={() => { this.props.navigation.openDrawer(); Keyboard.dismiss() }}
+        // screenOptions={{
+        //     header: ({ scene }) => {
+        //         const { options } = scene.descriptor;
+        //         const title = 'header';
+              
+        //         return (
+        //           <MyHeader
+        //             title='header'
+        //             leftButton={
+        //               <DrawerToggleButton
+        //                 onPress={scene.descriptor.navigation.toggleDrawer}
+        //               />
+        //             }
+        //             style={options.headerStyle}
+        //           />
+        //         );
+        //       }
+        // }}
+        >
+            <Drawer.Screen name="HomeScreen" component={HomeScreen} options={{ title: 'Home',
+            headerStyle: {
+                backgroundColor: '#f4511e',
+              },
+         
+         }} />
+            <Drawer.Screen name="ActivityScreen" component={ActivityScreen} options={{title: 'Activity' }} />
+            <Drawer.Screen name="HistoryScreen" component={HistoryScreen} options={{title: 'History' }} />
+            <Drawer.Screen name="SettingsScreen" component={SettingsScreen} options={{title: 'Settings' }} />
         </Drawer.Navigator>
     );
 

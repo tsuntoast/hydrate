@@ -12,10 +12,12 @@ import {combineReducers, createStore} from 'redux';
 import {Provider} from 'react-redux';
 import countReducer from './store/reducers/countReducer';
 import unitReducer from './store/reducers/unitReducer';
+import recordReducer from './store/reducers/recordReducer';
 
 const rootReducer = combineReducers({
   count: countReducer,
-  unit: unitReducer
+  unit: unitReducer,
+  record: recordReducer,
 });
 
 const store = createStore(rootReducer);

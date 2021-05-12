@@ -2,16 +2,21 @@ import React, { useState } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Button, Image, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import HamburgerIcon from '../Components/HamburgerIcon';
 
-import {addCount} from '../store/actions/actionTypes';
+import {addCount, addTimestamp, addRecord} from '../store/actions/actionTypes';
 import {useSelector, useDispatch} from 'react-redux';
 
 const HomeScreen = props => {
-
-    const dispatch = useDispatch();
-    const add = (target) => dispatch({ type: addCount, value: Number(target) });
     // Calling in state from redux
     const counts = useSelector(state => state.count);
     const units = useSelector(state => state.unit);
+    const records = useSelector(state => state.record);
+
+    const dispatch = useDispatch();
+    const add = (target) => dispatch({ type: addCount, value: Number(target) });
+    //const log = () => dispatch({ type: addTimestamp });
+    const record = (date) => dispatch({ type: addRecord, payload: {key: records.recordsKey, timeLog: (date), amount: Number(loggedAmount)} });
+    
+    
 
     // FIXME: for timestamps
     const [loggedAmount, setLoggedAmount] = useState('');
@@ -54,6 +59,8 @@ const HomeScreen = props => {
                             else {
                                 // Redux
                                 add(loggedAmount);
+                                //log();
+                                record(new Date());
 
                                 // Resets text input field
                                 setLoggedAmount('');
