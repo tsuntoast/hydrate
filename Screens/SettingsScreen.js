@@ -1,6 +1,5 @@
 import React from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
-import HamburgerIcon from '../Components/HamburgerIcon';
 
 import { changeToML, changeToOz } from '../store/actions/actionTypes';
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,7 +20,6 @@ const SettingsScreen = props => {
         >
             <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
                 <SafeAreaView>
-                    <HamburgerIcon onPress={() => { props.navigation.openDrawer() }} />
 
                     <View styles={styles.contentContainer}>
                         <View style={styles.headerContainer}>
@@ -32,13 +30,14 @@ const SettingsScreen = props => {
                             <Text style={styles.subHeader}>Volume Units</Text>
 
                             <TouchableOpacity disabled={(units.unit === 'oz')} onPress={() => { 
-                                //disabled prevents oz from being reconverted to oz
-                                //convert total count
+                                // Disabling button prevents accidental multiple conversions
+
+                                // Converts total count
                                 if (counts.count != 0) {
                                     counts.count = (counts.count * 0.0338).toFixed(1);
                                 }
 
-                                //convert count of records, parse through records.records.amount
+                                // Convert count of records, parse through records.records.amount
                                 //use map() to mutate records.records.amount
                                 
                                 changeUnitsToOz();

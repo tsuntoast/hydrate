@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
-import HamburgerIcon from '../Components/HamburgerIcon';
 
 import {useSelector} from 'react-redux';
-
-
 
 const ActivityScreen = props => {
 
@@ -19,8 +16,6 @@ const ActivityScreen = props => {
         >
             <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
                 <SafeAreaView>
-
-                    <HamburgerIcon onPress={() => { props.navigation.openDrawer() }} />
 
                     <View>
                         <Text>hi this is Activity</Text>

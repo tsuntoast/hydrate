@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, FlatList, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback} from 'react-native';
-import HamburgerIcon from '../Components/HamburgerIcon';
+import { LinearGradient } from 'expo-linear-gradient';
+import Log from '../Components/Log';
 
-import {addTimestamp} from '../store/actions/actionTypes';
+//import {addTimestamp} from '../store/actions/actionTypes';
 import {useSelector, useDispatch} from 'react-redux';
+
 
 const HistoryScreen = props => {
 
-   const dispatch = useDispatch();
-   const log = () => dispatch({ type: addTimestamp });
+   // const dispatch = useDispatch();
+   // const log = () => dispatch({ type: addTimestamp });
    // Calling in state from redux
    const records = useSelector(state => state.record);
    const units = useSelector(state => state.unit);
@@ -20,7 +22,6 @@ const HistoryScreen = props => {
       // >
       //    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <SafeAreaView style={styles.safeAreaView}>
-               <HamburgerIcon onPress={() => { props.navigation.openDrawer() }} />
 
                <View style={{ marginBottom: 50 }}>
                   <Text>Timestamps</Text>
@@ -30,6 +31,11 @@ const HistoryScreen = props => {
                <View style={{ flex: 1 }}>
                   <Text>hi start of flatlist</Text>
                   {console.log(records)}
+                  <LinearGradient
+                     // Background Linear Gradient
+                     colors={['rgba(0,0,0,0.8)', 'transparent']}
+                     //style={styles.background}
+                  />
                   <FlatList
                      //contentContainerStyle={{ flex: 1 }}
                      data={records.records}
@@ -37,8 +43,7 @@ const HistoryScreen = props => {
                         <View>
 
                            <View style={{ paddingTop: 10 }}>
-                              <Text>pretend this is a log</Text>
-                              <Text style={{ fontWeight: 'bold' }}>You drank {item.amount} {units.unit} at {item.timeLog}</Text>
+                              <Log time={item.timeLog} intake={item.amount} unit={units.unit}/>
                            </View>
 
                            {/* <View

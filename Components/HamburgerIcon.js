@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';

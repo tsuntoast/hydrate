@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Button, Image, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
-import HamburgerIcon from '../Components/HamburgerIcon';
 
 import {addCount, addTimestamp, addRecord} from '../store/actions/actionTypes';
 import {useSelector, useDispatch} from 'react-redux';
@@ -32,9 +31,7 @@ const HomeScreen = props => {
                 behavior="padding"
             >
 
-        
                 <SafeAreaView>
-                    <HamburgerIcon onPress={() => { props.navigation.openDrawer() }} />
 
                     <View style={styles.imageContainer}>
                         <Image source={require('../assets/logo.png')}
@@ -45,7 +42,6 @@ const HomeScreen = props => {
                         <Text>You have drank</Text>
                         <Text style={{ fontSize: 60 }}>{counts.count}</Text>
                         <Text>{units.unit} of water today.</Text>
-
                     </View>
 
                     <View style={{ paddingVertical: 20 , alignItems: 'center'}}>
@@ -57,15 +53,11 @@ const HomeScreen = props => {
                                 alert("Empty field. Please try again.");
                             }
                             else {
-                                // Redux
-                                add(loggedAmount);
-                                //log();
-                                record(new Date());
+                                add(loggedAmount);      // Adds to total count
+                                record(new Date());     // Adds record
 
-                                // Resets text input field
-                                setLoggedAmount('');
+                                setLoggedAmount('');    // Resets text input field
                             }
-
                         }} />
                     </View>
                 </SafeAreaView>
