@@ -18,11 +18,19 @@ const ActivityScreen = props => {
                 <SafeAreaView>
 
                     <View>
-                        <Text>hi this is Activity</Text>
-                        <Text>test {counts.count} test {units.units}</Text>
+                        <Text style={styles.summaryText}>This week your water intake was {counts.weekCount} {units.unit}, which was [stats here] than last week's average.</Text>
+                        <Text>daily count = {counts.count} {units.unit}</Text>
                         <Text>weekly = {counts.weekCount} , month = {counts.monthCount}</Text>
-                        
                     </View>
+
+                    <View style={styles.summaryContainer}>
+                        <Text style={styles.headerText}>This Week</Text>
+                    </View>
+
+                    <View style={styles.summaryContainer}>
+                        <Text style={styles.headerText}>This Month</Text>
+                    </View>
+
                 </SafeAreaView>
             </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
@@ -36,6 +44,15 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    summaryContainer: {
+        paddingTop: 20,
+    },
+    summaryText: {
+        fontSize: 18,
+    },
+    headerText: {
+        fontSize: 24,
     },
 
 });
