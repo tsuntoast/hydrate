@@ -55,7 +55,6 @@ const HomeScreen = props => {
                     <TextInput style={styles.textInput} keyboardType='numeric' placeholder='Amount' value={loggedAmount} onChangeText={(text) => setLoggedAmount(text)} />
 
                     <Button title="Submit" onPress={() => {
-
                         if (!loggedAmount) { // If field is empty
                             alert("Empty field. Please try again.");
                         }
@@ -69,12 +68,11 @@ const HomeScreen = props => {
                 </View>
 
                 <View style={{ alignItems: 'center' }}>
-                    <FontAwesomeIcon icon={faChevronDown} size={50} onPress={() => {
+                    <FontAwesomeIcon icon={faChevronDown} size={30} onPress={() => {
+                        Keyboard.dismiss();
                         setIsShowing(!isShowing);
-                        console.warn("Pressed");
                         setIsExpanded(!isExpanded);
-                    }} icon={ isExpanded === true ? faChevronUp : faChevronDown}
-/>
+                    }} icon={ isExpanded === true ? faChevronUp : faChevronDown } />
                     <Text>hi start of flatlist</Text>
                     {console.log(records)}
                     {isShowing ? (
