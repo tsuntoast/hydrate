@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, FlatList, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback} from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, FlatList, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, TouchableOpacity} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Log from '../Components/Log';
+
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 
 //import {addTimestamp} from '../store/actions/actionTypes';
 import {useSelector, useDispatch} from 'react-redux';
@@ -15,6 +18,9 @@ const HistoryScreen = props => {
    const records = useSelector(state => state.record);
    const units = useSelector(state => state.unit);
 
+   const [isShowing, setIsShowing] = useState(false);
+   const [isExpanded, setIsExpanded] = useState(false);
+
    return (
       // <KeyboardAvoidingView
       //    style={styles.safeAreaView}
@@ -25,7 +31,12 @@ const HistoryScreen = props => {
 
                <View style={{ marginBottom: 50 }}>
                   <Text>Timestamps</Text>
-                  {/* <Button title="Refresh" onPress={ () => { log() }} /> */}
+                  {/* <Button title="Reveal" onPress={ () => { setIsShowing(!isShowing) }} /> */}
+                  
+                  <FontAwesomeIcon icon={faChevronDown} size={50} onPress={() => {
+                     setIsShowing(!isShowing);
+                     console.warn("Pressed");
+                  }} />
                </View>
 
                <View style={{ flex: 1 }}>
@@ -36,30 +47,25 @@ const HistoryScreen = props => {
                      colors={['rgba(0,0,0,0.8)', 'transparent']}
                      //style={styles.background}
                   />
-                  <FlatList
-                     //contentContainerStyle={{ flex: 1 }}
-                     data={records.records}
-                     renderItem={({ item }) =>
-                        <View>
+                  {isShowing ? (
+                     <FlatList
+                        //contentContainerStyle={{ flex: 1 }}
+                        data={records.records}
+                        renderItem={({ item }) =>
+                           <View>
 
-                           <View style={{ paddingTop: 10 }}>
-                              <Log time={item.timeLog} intake={item.amount} unit={units.unit}/>
+                              <View style={{ paddingTop: 10 }}>
+                                 <Log time={item.timeLog} intake={item.amount} unit={units.unit} />
+                              </View>
+
+                              {/* use ItemSeparatorComponent */}
+
                            </View>
-
-                           {/* <View
-                              style={{ // Creates line between items
-                                 borderBottomColor: 'black',
-                                 borderBottomWidth: StyleSheet.hairlineWidth,
-                                 alignSelf: 'center',
-                                 width: '70%',
-                                 marginBottom: 10
-                              }}
-                           /> */}
-
-                        </View>
-                     }
-                     keyExtractor={(item, index) => index.toString()}
-                  />
+                        }
+                        keyExtractor={item => item.key.toString()}
+                     />
+                  ) : null }
+                  
                </View>
 
             </SafeAreaView>
