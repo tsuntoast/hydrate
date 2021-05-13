@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Button, Image, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, FlatList } from 'react-native';
 
-import { addCount, addRecord } from '../store/actions/actionTypes';
+import { addLog } from '../store/actions/actionTypes';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Log from '../Components/Log';
@@ -11,17 +11,13 @@ import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 
 const HomeScreen = props => {
     // Calling in state from redux
-    const counts = useSelector(state => state.count);
     const units = useSelector(state => state.unit);
     const records = useSelector(state => state.record);
 
     const dispatch = useDispatch();
-    const add = (target) => dispatch({ type: addCount, value: Number(target) });
-    //const log = () => dispatch({ type: addTimestamp });
-    const record = (date) => dispatch({ type: addRecord, payload: { key: records.recordsKey, timeLog: (date), amount: Number(loggedAmount) } });
+    const record = (date) => dispatch({ type: addLog, payload: { key: records.logKey, timeLog: (date), amount: Number(loggedAmount) } });
 
     const [loggedAmount, setLoggedAmount] = useState('');
-    const [isShowing, setIsShowing] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
@@ -44,7 +40,7 @@ const HomeScreen = props => {
 
                 <View style={styles.dailySummaryContainer}>
                     <Text>You have drank</Text>
-                    <Text style={{ fontSize: 60 }}>{counts.count}</Text>
+                    <Text style={{ fontSize: 60 }}>{records.dayCount}</Text>
                     <Text>{units.unit} of water today.</Text>
                 </View>
 
@@ -56,8 +52,7 @@ const HomeScreen = props => {
                             alert("Empty field. Please try again.");
                         }
                         else {
-                            add(loggedAmount);      // Adds to total count
-                            record(new Date());     // Adds record
+                            record(new Date());     // Adds log and updates counts
 
                             setLoggedAmount('');    // Resets text input field
                         }
@@ -67,14 +62,12 @@ const HomeScreen = props => {
                 <View style={{ alignItems: 'center' }}>
                     <FontAwesomeIcon icon={faChevronDown} size={30} onPress={() => {
                         Keyboard.dismiss();
-                        setIsShowing(!isShowing);
                         setIsExpanded(!isExpanded);
                     }} icon={ isExpanded === true ? faChevronUp : faChevronDown } />
-                    {/* {console.log(records)} */}
-                    {isShowing ? (
+                    {isExpanded ? (
                         <FlatList
                             //contentContainerStyle={{ flex: 1 }}
-                            data={records.records}
+                            data={records.logs}
                             renderItem={({ item }) =>
                                 <View>
 

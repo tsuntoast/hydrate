@@ -3,7 +3,7 @@ import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, Keyboard, Keyb
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-import { changeToML, changeToOz } from '../store/actions/actionTypes';
+import { changeToML, changeToOz, convertLogsToOz, convertLogsToML } from '../store/actions/actionTypes';
 import { useSelector, useDispatch } from 'react-redux';
 
 const SettingsScreen = props => {
@@ -11,9 +11,10 @@ const SettingsScreen = props => {
     const dispatch = useDispatch();
     const changeUnitsToML = () => dispatch({ type: changeToML });
     const changeUnitsToOz = () => dispatch({ type: changeToOz });
+    const convertToOz = () => dispatch({ type: convertLogsToOz });
+    const convertToML = () => dispatch({ type: convertLogsToML });
     // Calling in state from redux
     const units = useSelector(state => state.unit);
-    const counts = useSelector(state => state.count);
     const records = useSelector(state => state.record);
 
     // For the Switch
@@ -51,27 +52,14 @@ const SettingsScreen = props => {
 
                             <TouchableOpacity disabled={(units.unit === 'oz')} onPress={() => { 
                                 // Disabling button prevents accidental multiple conversions
-
-                                // Converts total count
-                                if (counts.count != 0) {
-                                    counts.count = (counts.count * 0.0338).toFixed(1);
-                                }
-
-                                // Convert count of records, parse through records.records.amount
-                                //use map() to mutate records.records.amount
-                                //records.records.map(item.amount => {item.amount * 0.0338});
-                                
+                                convertToOz();
                                 changeUnitsToOz();
-                                
                             }} >
                                 <Text style={units.unit === 'oz' ? styles.active : styles.inactive}>(Fluid) Ounces (oz)</Text>
                             </TouchableOpacity>
                             <TouchableOpacity disabled={(units.unit === 'mL')} onPress={() => { 
-                                if (counts.count != 0) {
-                                    counts.count = (counts.count * 29.573).toFixed(1);
-                                }
-                                
-                                changeUnitsToML()
+                                convertToML();
+                                changeUnitsToML();
                             }} >
                                 <Text style={units.unit === 'mL' ? styles.active : styles.inactive}>Milliliters (mL)</Text>
                             </TouchableOpacity>

@@ -1,12 +1,18 @@
 export const addCount = 'ADD_COUNT';
-//export const deleteCount = 'DELETE_COUNT'; would be in countReducer...couple with deleteRecord in onPress of delete button
-export const addRecord = 'ADD_RECORD';
+
+export const addLog = 'ADD_LOG';
+
+//export const deleteLog = 'DELETE_LOG';
+//button onPress of log
+
+export const convertLogsToOz = 'CONVERT_LOGS_TO_OZ';
+
+export const convertLogsToML = 'CONVERT_LOGS_TO_ML';
 
 export const changeToML = 'CHANGE_TO_ML';
 
 export const changeToOz = 'CHANGE_TO_OZ';
 
-export const addTimestamp = 'ADD_TIMESTAMP';
 
 
 

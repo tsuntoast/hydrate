@@ -11,8 +11,6 @@ const countReducer = (state = initialState, action) => {
    switch (action.type) {
 
       case addCount:
-         // Updates daily count
-         //let copyOfState = {...state, count:(state.count + action.value)};   //key:value
          let copyOfState = {...state, count:(state.count + action.value),
                                        weekCount:(state.weekCount + action.value),
                                        monthCount:(state.monthCount + action.value) }; 
