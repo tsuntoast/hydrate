@@ -1,39 +1,32 @@
-import React, { useState } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import React, {} from 'react';
+import { SafeAreaView, View, Text, StyleSheet, Button, } from 'react-native';
 
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const ActivityScreen = props => {
 
-    //Redux
-    const counts = useSelector(state => state.count);
+    // Redux State
+    const records = useSelector(state => state.record);
     const units = useSelector(state => state.unit);
 
     return (
-        <KeyboardAvoidingView
-            style={styles.safeAreaView}
-            behavior="padding"
-        >
-            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-                <SafeAreaView>
+        <SafeAreaView style={styles.safeAreaView}>
 
-                    <View>
-                        <Text style={styles.summaryText}>This week your water intake was {counts.weekCount} {units.unit}, which was [stats here] than last week's average.</Text>
-                        <Text>daily count = {counts.count} {units.unit}</Text>
-                        <Text>weekly = {counts.weekCount} , month = {counts.monthCount}</Text>
-                    </View>
+            <View>
+                <Text style={styles.summaryText}>This week your water intake was {records.weekCount} {units.unit}, which was [stats here] than last week's average.</Text>
+                <Text>daily count = {records.dayount} {units.unit}</Text>
+                <Text>weekly = {records.weekCount} , month = {records.weekCount}</Text>
+            </View>
 
-                    <View style={styles.summaryContainer}>
-                        <Text style={styles.headerText}>This Week</Text>
-                    </View>
+            <View style={styles.summaryContainer}>
+                <Text style={styles.headerText}>This Week</Text>
+            </View>
 
-                    <View style={styles.summaryContainer}>
-                        <Text style={styles.headerText}>This Month</Text>
-                    </View>
+            <View style={styles.summaryContainer}>
+                <Text style={styles.headerText}>This Month</Text>
+            </View>
 
-                </SafeAreaView>
-            </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
+        </SafeAreaView>
 
     );
 
