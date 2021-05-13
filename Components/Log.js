@@ -6,21 +6,10 @@ const Log = props => {
 	return (
 		<View style={styles.rootContainer}>
 
-				<View style={styles.logContainer}>
+			<Text style={styles.timeText}>{props.time}</Text>
+			<Text style={styles.intakeText}>{props.intake} {props.unit}</Text>
 
-					<View style={styles.timeContainer}>
-						<Text style={styles.logText}>{props.time}</Text>
-					</View>
-
-					<View style={styles.intakeContainer}>
-						<Text style={styles.logText}>
-							{props.intake} {props.unit}
-						</Text>
-					</View>
-
-				</View>
-
-			</View>
+		</View>
 	);
 };
 
@@ -29,20 +18,21 @@ Log.propTypes = { time: PropTypes.string.isRequired, intake: PropTypes.number.is
 const styles = StyleSheet.create({
 	rootContainer: {
 		flex: 1,
-		backgroundColor: 'lightgrey',
-		padding: 5,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	logContainer: {
 		flexDirection: 'row',
+		justifyContent: 'space-between',
+		paddingVertical: 5,
+		paddingHorizontal: 10,
+		width: 200,
+		backgroundColor: 'lightgrey',
 	},
-	timeContainer: {
-		marginRight: 20,
+	timeText: {
+		fontSize: 20,
+		//fontWeight: 'bold',
 	},
-	logText: {
+	intakeText: {
 		fontSize: 20,
 		fontWeight: 'bold',
+		color: 'royalblue'
 	},
 });
 
