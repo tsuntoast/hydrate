@@ -1,21 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 // Navigation
 import { NavigationContainer } from '@react-navigation/native';
 
 // My Navigational Flow
-import { HomeScreenStack, MyBottomTabNavigator, MyDrawer } from './Navigation/MainNavigator';
+import { MyDrawer } from './Navigation/MainNavigator';
 
 import {combineReducers, createStore} from 'redux';
 import {Provider} from 'react-redux';
-import countReducer from './store/reducers/countReducer';
 import unitReducer from './store/reducers/unitReducer';
 import recordReducer from './store/reducers/recordReducer';
 
 const rootReducer = combineReducers({
-  count: countReducer,
   unit: unitReducer,
   record: recordReducer,
 });
@@ -25,9 +22,6 @@ const store = createStore(rootReducer);
 export default function App() {
 
   return (
-    // <NavigationContainer>
-    //   <HomeScreenStack />
-    // </NavigationContainer>
 
     <Provider store={store}>
 
@@ -37,10 +31,6 @@ export default function App() {
 
     </Provider>
 
-
-    // <NavigationContainer>
-    //   <MyBottomTabNavigator />
-    // </NavigationContainer>
   );
 
 }
@@ -53,5 +43,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-//export default App;

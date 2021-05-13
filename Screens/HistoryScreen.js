@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Button, TextInput, FlatList, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, TouchableOpacity} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import Log from '../Components/Log';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -42,11 +41,7 @@ const HistoryScreen = props => {
                <View style={{ flex: 1 }}>
                   <Text>hi start of flatlist</Text>
                   {console.log(records)}
-                  <LinearGradient
-                     // Background Linear Gradient
-                     colors={['rgba(0,0,0,0.8)', 'transparent']}
-                     //style={styles.background}
-                  />
+
                   {isShowing ? (
                      <FlatList
                         //contentContainerStyle={{ flex: 1 }}
