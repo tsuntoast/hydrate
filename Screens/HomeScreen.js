@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Button, Image, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, FlatList } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, Button, Image, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, FlatList, ScrollView } from 'react-native';
 
 import { addLog } from '../store/actions/actionTypes';
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,71 +21,74 @@ const HomeScreen = props => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        // <KeyboardAvoidingView
-        //     //style={styles.safeAreaView}
-        //     behavior="padding"
-        // >
-        <TouchableWithoutFeedback style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
-            {/* <KeyboardAvoidingView
-                //style={styles.safeAreaView}
-                behavior="padding"
-            > */}
+       
+        <SafeAreaView style={styles.safeAreaView}>
 
-            <SafeAreaView>
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
 
-                <View style={styles.imageContainer}>
-                    <Image source={require('../assets/logo.png')}
-                        style={{ width: 100, height: 100, resizeMode: 'contain' }} />
+                <View style={styles.upperContentContainer}>
+
+                    <View style={styles.imageContainer}>
+                        <Image source={require('../assets/logo.png')}
+                            style={{ width: 100, height: 200, resizeMode: 'contain' }}
+                        />
+                    </View>
+
+                    <View style={styles.dailySummaryContainer}>
+                        <Text>You have drank</Text>
+                        <Text style={{ fontSize: 60 }}>{records.dayCount}</Text>
+                        <Text>{units.unit} of water today.</Text>
+                    </View>
+
+                    <View style={styles.inputContainer}>
+                        <TextInput style={styles.textInput} keyboardType='numeric' placeholder='Amount' value={loggedAmount} onChangeText={(text) => setLoggedAmount(text)} />
+
+                        <Button title="Submit"
+                            onPress={() => {
+                                if (!loggedAmount) { // If field is empty
+                                    alert("Empty field. Please try again.");
+                                }
+                                else {
+                                    record(new Date());     // Adds log and updates counts
+                                    setLoggedAmount('');    // Resets text input field
+                                }
+                            }}
+                        />
+                    </View>
+
                 </View>
 
-                <View style={styles.dailySummaryContainer}>
-                    <Text>You have drank</Text>
-                    <Text style={{ fontSize: 60 }}>{records.dayCount}</Text>
-                    <Text>{units.unit} of water today.</Text>
-                </View>
+            </TouchableWithoutFeedback>
 
-                <View style={{ paddingVertical: 20, alignItems: 'center' }}>
-                    <TextInput style={styles.textInput} keyboardType='numeric' placeholder='Amount' value={loggedAmount} onChangeText={(text) => setLoggedAmount(text)} />
+            <View style={styles.logContainer}>
 
-                    <Button title="Submit" onPress={() => {
-                        if (!loggedAmount) { // If field is empty
-                            alert("Empty field. Please try again.");
-                        }
-                        else {
-                            record(new Date());     // Adds log and updates counts
-
-                            setLoggedAmount('');    // Resets text input field
-                        }
-                    }} />
-                </View>
-
-                <View style={{ alignItems: 'center' }}>
-                    <FontAwesomeIcon icon={faChevronDown} size={30} onPress={() => {
+                <FontAwesomeIcon
+                    style={styles.arrowIcon}
+                    icon={faChevronDown} size={30}
+                    onPress={() => {
                         Keyboard.dismiss();
                         setIsExpanded(!isExpanded);
-                    }} icon={ isExpanded === true ? faChevronUp : faChevronDown } />
-                    {isExpanded ? (
-                        <FlatList
-                            //contentContainerStyle={{ flex: 1 }}
-                            data={records.logs}
-                            renderItem={({ item }) =>
-                                <View>
+                    }}
+                    icon={isExpanded === true ? faChevronUp : faChevronDown}
+                />
 
-                                    <View style={{ paddingTop: 10 }}>
-                                        <Log time={item.timeLog} intake={item.amount} unit={units.unit} />
-                                    </View>
+                {isExpanded ? (
+                    <FlatList
+                        data={records.logs}
+                        renderItem={({ item }) =>
 
-                                </View>
-                            }
-                            keyExtractor={item => item.key.toString()}
-                        />
-                    ) : null}
+                            <View style={styles.logItem}>
+                                <Log time={item.timeLog} intake={item.amount} unit={units.unit} />
+                            </View>
+                            
+                        }
+                        keyExtractor={item => item.key.toString()}
+                    />
+                ) : null}
 
-                </View>
-            </SafeAreaView>
-            {/* </KeyboardAvoidingView> */}
-        </TouchableWithoutFeedback>
-        //</KeyboardAvoidingView>
+            </View>
+
+        </SafeAreaView>
 
     );
 
@@ -94,23 +97,45 @@ const HomeScreen = props => {
 const styles = StyleSheet.create({
     safeAreaView: {
         flex: 1,
-        justifyContent: 'center',
+    },
+    upperContentContainer: {
+        flex: 1,
         alignItems: 'center',
     },
     imageContainer: {
+        flex: 1,
         alignItems: 'center',
-        paddingBottom: 20,
+        justifyContent: 'center',
+        marginBottom: 20,
     },
     dailySummaryContainer: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        width: '100%',
+    },
+    inputContainer: {
+        justifyContent: 'center',
+        flex: 1,
+        height: 200,
     },
     textInput: {
         borderBottomWidth: 1,
         borderColor: '#AA8A81',
         backgroundColor: 'lightgrey',
         padding: 4,
-        width: 100
+        width: 100,
+    },
+    arrowIcon: {
+        alignSelf: 'center',
+    },
+    logContainer: {
+        flex: 1,
+    },
+    logItem: {
+        flex: 1,
+        alignItems: 'center',
+        paddingTop: 10,
     },
 
 });
