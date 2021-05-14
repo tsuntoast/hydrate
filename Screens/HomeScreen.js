@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Button, Image, TextInput, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, FlatList, ScrollView } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, Button, Image, TextInput, Keyboard, TouchableWithoutFeedback, FlatList } from 'react-native';
+//import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-import { addLog } from '../store/actions/actionTypes';
+// Redux Imports
+import { addLog, deleteLog } from '../store/actions/actionTypes';
 import { useSelector, useDispatch } from 'react-redux';
 
+// Components and Icons
 import Log from '../Components/Log';
-
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 
 const HomeScreen = props => {
-    // Calling in state from redux
+    // Redux State
     const units = useSelector(state => state.unit);
     const records = useSelector(state => state.record);
 
     const dispatch = useDispatch();
     const record = (date) => dispatch({ type: addLog, payload: { key: records.logKey, timeLog: (date), amount: Number(loggedAmount) } });
+    const remove = (keytoDelete) => dispatch({ type: deleteLog, key: keytoDelete });
 
     const [loggedAmount, setLoggedAmount] = useState('');
     const [isExpanded, setIsExpanded] = useState(false);
@@ -69,7 +72,7 @@ const HomeScreen = props => {
                         Keyboard.dismiss();
                         setIsExpanded(!isExpanded);
                     }}
-                    icon={isExpanded === true ? faChevronUp : faChevronDown}
+                    icon={isExpanded ? faChevronUp : faChevronDown}
                 />
 
                 {isExpanded ? (
@@ -79,7 +82,9 @@ const HomeScreen = props => {
 
                             <View style={styles.logItem}>
                                 <Log time={item.timeLog} intake={item.amount} unit={units.unit} />
+                                <Button title="Delete" onPress={() => remove(item.key)} />
                             </View>
+                            
                             
                         }
                         keyExtractor={item => item.key.toString()}

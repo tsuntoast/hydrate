@@ -1,4 +1,4 @@
-import {addLog, convertLogsToOz, convertLogsToML} from '../actions/actionTypes';
+import {addLog, deleteLog, convertLogsToOz, convertLogsToML} from '../actions/actionTypes';
 
 const initialState = {
    logs: [],
@@ -35,8 +35,23 @@ const recordReducer = (state = initialState, action) => {
             weekCount: (state.weekCount + action.payload.amount),
             monthCount:(state.monthCount + action.payload.amount)};
 
-      //case deleteLog:
-         // maybe
+      case deleteLog:
+         // const remove = (keytoDelete) => dispatch({ type: deleteLog, key: (keytoDelete)  });
+         // delete(item.key)
+
+         let deletedLogs = [...state.logs];
+         for (let i = 0; i < deletedLogs.length; i++) {
+            if (deletedLogs[i].key === action.key) {
+               let deletedLog = deletedLogs[i];
+               deletedLogs.splice(i, 1);
+
+               return {...state,
+                  logs: deletedLogs,
+                  dayCount: state.dayCount - deletedLog.amount,
+                  weekCount: state.weekCount - deletedLog.amount,
+                  monthCount: state.monthCount - deletedLog.amount};
+            }
+         }
 
       case convertLogsToOz:
          let logsToOz = [...state.logs];
