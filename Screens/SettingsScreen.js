@@ -25,27 +25,30 @@ const SettingsScreen = props => {
 
     // For DateTimePicker
     const [date, setDate] = useState(new Date(1598051730000));
+    const [date2, setDate2] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
-        //setShow(Platform.OS === 'ios');
+        setShow(Platform.OS === 'ios');
         setDate(currentDate);
+    };
+
+    const onChange2 = (event, selectedDate) => {
+        const currentDate2 = selectedDate || date2;
+        setShow(Platform.OS === 'ios');
+        setDate2(currentDate2);
     };
 
     return (
         <KeyboardAvoidingView
             style={styles.safeAreaView}
-            behavior="padding"
+            behavior="padding"   
         >
-            {/* <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}> */}
                 <SafeAreaView>
 
                     <View styles={styles.contentContainer}>
-                        {/* <View style={styles.headerContainer}>
-                            <Text style={styles.header}>Settings</Text>
-                        </View> */}
 
                         <View>
                             <Text style={styles.header}>Volume Units</Text>
@@ -78,11 +81,9 @@ const SettingsScreen = props => {
                                 />
                             </View>
                             
-                            <Text>Notifications is {isEnabled ? 'enabled' : 'disabled'}</Text>
-                            
-                            <View style={ isEnabled ? null : {opacity: 0.5}}>
+                            <View style={ isEnabled ? null : {opacity: 0.5}} pointerEvents={isEnabled ? null : 'none'}>
                                 <View style={styles.pushContainer}>
-                                    <Text>Remind me every</Text>
+                                    <Text style={{paddingBottom: 20}}>Remind me every</Text>
                                     <RNPickerSelect
                                         disabled={!isEnabled}
                                         onValueChange={(value) => console.log(value)}
@@ -95,10 +96,11 @@ const SettingsScreen = props => {
                                     />
                                 </View>
 
-                                <View >
-                                    <Text>From</Text>
+                                <View style={{flexDirection: 'row'}}>
+                                    <Text style={{paddingBottom: 35}}>From</Text>
                                     <DateTimePicker
-                                        value={new Date()}
+                                        style={{width: '50%'}}
+                                        value={date}
                                         mode={'time'}
                                         is24Hour={true}
                                         display="compact"
@@ -108,30 +110,26 @@ const SettingsScreen = props => {
                                     />
                                 </View>
                                 
-                                <View>
+                                <View style={{flexDirection: 'row'}}>
                                     <Text>To</Text>
                                     <DateTimePicker
-                                        value={new Date()}
+                                        style={{width: '50%', paddingRight: 80}}
+                                        value={date2}
                                         mode={'time'}
                                         is24Hour={true}
                                         display="compact"
                                         //disabled={!isEnabled}
                                         minuteInterval={5}
-                                        onChange={onChange}
+                                        onChange={onChange2}
                                     />
                                 </View>
-
-                                
                                 
                             </View>
-                            
-                            
                             
                         </View>
                     </View>
 
                 </SafeAreaView>
-            {/* </TouchableWithoutFeedback> */}
         </KeyboardAvoidingView>
 
     );
