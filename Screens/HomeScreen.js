@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Log from '../Components/Log';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import AppleStyleSwipeableRow from '../Components/AppleStyleSwipeableRow';
 
 const HomeScreen = props => {
     // Redux State
@@ -81,8 +82,11 @@ const HomeScreen = props => {
                         renderItem={({ item }) =>
 
                             <View style={styles.logItem}>
-                                <Log time={item.timeLog} intake={item.amount} unit={units.unit} />
-                                <Button title="Delete" onPress={() => remove(item.key)} />
+                                <AppleStyleSwipeableRow onPress={() => remove(item.key)}>
+                                    <Log time={item.timeLog} intake={item.amount} unit={units.unit} />
+                                    {/* <Button title="Delete" onPress={() => remove(item.key)} /> */}
+                                </AppleStyleSwipeableRow>
+                                
                             </View>
                             
                             
