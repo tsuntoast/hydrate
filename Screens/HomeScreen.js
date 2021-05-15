@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Button, Image, TextInput, Keyboard, TouchableWithoutFeedback, FlatList } from 'react-native';
-//import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 // Redux Imports
 import { addLog, deleteLog } from '../store/actions/actionTypes';
@@ -52,6 +51,9 @@ const HomeScreen = props => {
                                 if (!loggedAmount) { // If field is empty
                                     alert("Empty field. Please try again.");
                                 }
+                                else if (loggedAmount <= 0) {
+                                    alert("Amount must be greater than 0. Please try again.");
+                                }
                                 else {
                                     record(new Date());     // Adds log and updates counts
                                     setLoggedAmount('');    // Resets text input field
@@ -84,7 +86,6 @@ const HomeScreen = props => {
                             <View style={styles.logItem}>
                                 <AppleStyleSwipeableRow onPress={() => remove(item.key)}>
                                     <Log time={item.timeLog} intake={item.amount} unit={units.unit} />
-                                    {/* <Button title="Delete" onPress={() => remove(item.key)} /> */}
                                 </AppleStyleSwipeableRow>
                                 
                             </View>
@@ -94,7 +95,7 @@ const HomeScreen = props => {
                         keyExtractor={item => item.key.toString()}
                     />
                 ) : null}
-
+                
             </View>
 
         </SafeAreaView>

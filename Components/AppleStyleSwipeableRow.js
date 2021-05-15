@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Animated, StyleSheet, Text, View, I18nManager } from 'react-native';
+import { Animated, StyleSheet, Text, View } from 'react-native';
 
 import { RectButton, Swipeable } from 'react-native-gesture-handler';
 
