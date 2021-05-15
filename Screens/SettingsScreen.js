@@ -104,7 +104,6 @@ const SettingsScreen = props => {
                                         mode={'time'}
                                         is24Hour={true}
                                         display="compact"
-                                        //disabled={!isEnabled}
                                         minuteInterval={5}
                                         onChange={onChange}
                                     />
@@ -118,7 +117,6 @@ const SettingsScreen = props => {
                                         mode={'time'}
                                         is24Hour={true}
                                         display="compact"
-                                        //disabled={!isEnabled}
                                         minuteInterval={5}
                                         onChange={onChange2}
                                     />
@@ -147,7 +145,7 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         alignItems: 'center',
-        paddingBottom: 20,      //attempt to pin to top
+        paddingBottom: 20,
     },
     header: {
         fontSize: 24,
