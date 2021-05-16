@@ -17,7 +17,7 @@ const HomeScreen = props => {
     const records = useSelector(state => state.record);
 
     const dispatch = useDispatch();
-    const record = (date) => dispatch({ type: addLog, payload: { key: records.logKey, timeLog: (date), amount: Number(loggedAmount) } });
+    const record = (date) => dispatch({ type: addLog, payload: { key: records.logKey, timeLog: (date), amount: Number(loggedAmount), dateKey: date } });
     const remove = (keytoDelete) => dispatch({ type: deleteLog, key: keytoDelete });
 
     const [loggedAmount, setLoggedAmount] = useState('');

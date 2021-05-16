@@ -14,6 +14,7 @@ const recordReducer = (state = initialState, action) => {
 
       case addLog:
          var currentDate = action.payload.timeLog;    // new Date()
+         action.payload.dateKey = (currentDate.getMonth()+1) + "-" + currentDate.getDate() + "-" + currentDate.getFullYear();
 
          // Get time out of date to push as timeLog
          var hours = (currentDate.getHours() > 12) ? currentDate.getHours() - 12
@@ -36,9 +37,6 @@ const recordReducer = (state = initialState, action) => {
             monthCount:(state.monthCount + action.payload.amount)};
 
       case deleteLog:
-         // const remove = (keytoDelete) => dispatch({ type: deleteLog, key: (keytoDelete)  });
-         // delete(item.key)
-
          let deletedLogs = [...state.logs];
          for (let i = 0; i < deletedLogs.length; i++) {
             if (deletedLogs[i].key === action.key) {
