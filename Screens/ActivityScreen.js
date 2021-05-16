@@ -1,12 +1,15 @@
-import React, {} from 'react';
-import { SafeAreaView, View, Text, StyleSheet, ImageBackground, ScrollView } from 'react-native';
-import { useSelector } from 'react-redux';
-import Day from '../Components/day';
+import React from 'react';
+import { SafeAreaView, View, Text, StyleSheet, ScrollView } from 'react-native';
 import { Dimensions } from "react-native";
 import {LineChart } from "react-native-chart-kit";
-import Helper from './Helper';
 import * as Animatable from 'react-native-animatable';
 
+// Redux Imports
+import { useSelector } from 'react-redux';
+
+// Components
+import Day from '../Components/Day';
+import Helper from '../Components/Helper';
 
 const ActivityScreen = props => {
 
@@ -18,7 +21,6 @@ const ActivityScreen = props => {
         color : '#136DF3',
         activestate : 'rgba(255, 255, 255, 0.291821)'
     };
-
 
     return (
         <SafeAreaView style={styles.safeAreaView}>
@@ -77,7 +79,7 @@ const ActivityScreen = props => {
 
                 <Animatable.View animation="fadeInRight" duration={1500} style={[styles.rectangleone,{top : 400,backgroundColor:'#F4F9FC'}]}>
                     <View>
-                        <Text style={styles.summaryText}>You had drank {records.dayCount} {units.unit} water today.</Text>
+                        <Text style={styles.summaryText}>You have drank {records.dayCount} {units.unit} of water today.</Text>
                     </View>
                 </Animatable.View>
                 
@@ -92,7 +94,7 @@ const ActivityScreen = props => {
 
                 <Animatable.View animation="fadeInRight" duration={1500} style={[styles.rectangleone,{top : 600,backgroundColor:'#F4F9FC'}]}>
                     <View style = {{top: 1}}>
-                        <Text style={styles.summaryText}>This week your water intake was {records.weekCount} {units.unit}</Text>
+                        <Text style={styles.summaryText}>This week, your water intake was {records.weekCount} {units.unit}</Text>
                     </View>
                 </Animatable.View>
 
@@ -106,7 +108,7 @@ const ActivityScreen = props => {
                 
                 <Animatable.View animation="fadeInRight" duration={1500} style={[styles.rectangleone,{top : 800,backgroundColor:'#F4F9FC'}]}>
                     <View>
-                        <Text style={styles.summaryText}>This month your water intake was {records.monthCount} {units.unit}</Text>
+                        <Text style={styles.summaryText}>This month, your water intake was {records.monthCount} {units.unit}</Text>
                     </View>
                 </Animatable.View>
 

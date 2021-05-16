@@ -20,8 +20,8 @@ function MyDrawer() {
             }}
         >
             <Drawer.Screen name="HomeScreen" component={HomeScreen} options={{ title: 'Home' }} />
-            <Drawer.Screen name="ActivityScreen" component={ActivityScreen} options={{title: 'Activity' }} />
-            <Drawer.Screen name="SettingsScreen" component={SettingsScreen} options={{title: 'Settings' }} />
+            <Drawer.Screen name="ActivityScreen" component={ActivityScreen} options={{ title: 'Activity' }} />
+            <Drawer.Screen name="SettingsScreen" component={SettingsScreen} options={{ title: 'Settings' }} />
 
         </Drawer.Navigator>
     );
