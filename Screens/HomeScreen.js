@@ -23,6 +23,8 @@ const HomeScreen = props => {
     const [loggedAmount, setLoggedAmount] = useState('');
     const [isExpanded, setIsExpanded] = useState(false);
 
+    const colors = ['#9E9E9E', '#D3D3D3'];
+
     return (
        
         <SafeAreaView style={styles.safeAreaView}>
@@ -82,10 +84,20 @@ const HomeScreen = props => {
                     <FlatList
                         data={records.logs}
                         renderItem={({ item }) =>
-
+                        
                             <View style={styles.logItem}>
                                 <AppleStyleSwipeableRow onPress={() => remove(item.key)}>
-                                    <Log time={item.timeLog} intake={item.amount} unit={units.unit} />
+                                    <Log time={item.timeLog} intake={item.amount} unit={units.unit} 
+                                        customStyle={{
+                                            flex: 1,
+                                            flexDirection: 'row',
+                                            justifyContent: 'space-between',
+                                            paddingVertical: 5,
+                                            paddingHorizontal: 10,
+                                            width: 200,
+                                            backgroundColor:  (item.key % 50 === 0) ? colors[1] : colors[0]
+                                        }} 
+                                    />
                                 </AppleStyleSwipeableRow>
                                 
                             </View>

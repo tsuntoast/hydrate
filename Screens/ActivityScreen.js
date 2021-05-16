@@ -8,7 +8,7 @@ import * as Animatable from 'react-native-animatable';
 import { useSelector } from 'react-redux';
 
 // Components
-import Day from '../Components/Day';
+import Day from '../Components/day';
 import Helper from '../Components/Helper';
 
 const ActivityScreen = props => {
