@@ -4,10 +4,12 @@ CS 4540-03 Topics in Advanced Computer Science: Mobile Development\
 Group 9: Erica Santos, Dean Baquir, Kevin Aguilera, Zudong Li
 
 ## Project Link
---publish
+https://expo.io/@esantos2/projects/hydrate
 
-## Notes
-The app has no database, meaning the logs cannot be stored and will be lost when refreshing the app. The app also has no notifications.
+## Project Overview
+Hydrate is a water tracker app that uses logs that the user submits. It will keep a record of your water intake over the past week or month, along with weekly and monthly averages and weekly summaries. The app uses Drawer Navigation, and consists of three screens: Home, Activity, and Settings.
+
+***Note:** The app has no database, meaning the logs cannot be stored and will be lost when refreshing the app. The app also has no notifications.*
 
 ## Home Screen
 The app loads into the Home Screen, which shows your water intake for the day. The user can input positive number values representing how many ounces/millimeters of water they drank. When the 'Submit' button is pressed, the count will update. The user can press on the arrow icon to show a list of their logs, showing how much they drank at what time. The most recent log will have a light blue background. To delete a log, the user can swipe right on a log and press 'Delete.'
